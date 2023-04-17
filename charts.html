@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/layout.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+	<title></title>
+</head>
+<body>
+	<div id = "background">
+		<div id = "container">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+				  <h1>fitbit analysis</h1>
+				</div>
+			</nav>
+			<h3>2023/01/16</h3>
+			<canvas id="myChart"></canvas>
+			<button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+    		<button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+			<pre id="content" style="white-space: pre-wrap;"></pre>
+			<div class="week-buttons"></div>
+			<script src="js/myscript.js"></script>
+			<script src="js/mygoogleApi.js"></script>
+			<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    		<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+		</div>
+	</div>
+</body>
+</html>
