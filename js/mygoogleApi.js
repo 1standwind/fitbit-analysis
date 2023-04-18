@@ -94,6 +94,35 @@ function handleSignoutClick() {
  * the authorized user's calendar. If no events are found an
  * appropriate message is printed.
  */
+function colorConverter(colorId) {
+  switch (colorId) {
+    case 1:
+      return 'rgba(121, 134, 203, 0.5)';
+    case 2:
+      return 'rgba(51, 182, 121, 0.5)';
+    case 3:
+      return 'rgba(142, 36, 170, 0.5)';
+    case 4:
+      return 'rgba(230, 124, 115, 0.5)';
+    case 5:
+      return 'rgba(246, 191, 38, 0.5)';
+    case '6':
+      return 'rgba(244, 81, 30, 0.5)';
+    case 7:
+      return 'rgba(3, 155, 229, 0.5)';
+    case 8:
+      return 'rgba(97, 97, 97, 0.5)';
+    case 9:
+      return 'rgba(63, 81, 181, 0.5)';
+    case 10:
+      return 'rgba(11, 128, 67, 0.5)';
+    case 11:
+      return 'rgba(213, 0, 0, 0.5)';
+    default:
+      return 'rgba(121, 134, 203, 0.5)';
+  }
+}
+
 async function listUpcomingEvents(date) {
   let response;
   try {
@@ -108,22 +137,24 @@ async function listUpcomingEvents(date) {
     };
     response = await gapi.client.calendar.events.list(request);
   } catch (err) {
-    return;
+    return
   }
 
+  scheduleReset()
   const events = response.result.items;
-  for(var i = 0; i < events.length; i++){
+  for (var i = 0; i < events.length; i++) {
     eventname = events[i].summary
     color = events[i].colorId
     startdate = new Date(events[i].start.dateTime)
-    starthours = ('0' +startdate.getHours()).slice(-2);
-    startminutes = ('0' +startdate.getMinutes()).slice(-2);
+    starthours = ('0' + startdate.getHours()).slice(-2);
+    startminutes = ('0' + startdate.getMinutes()).slice(-2);
     enddate = new Date(events[i].end.dateTime)
-    endhours = ('0' +enddate.getHours()).slice(-2);
-    endminutes = ('0' +enddate.getMinutes()).slice(-2);
-    console.log(color);
-    (function(j){
-      scheduleInput(j,eventname,'rgba(255, 99, 132, 0.5)',starthours+":"+startminutes,endhours+":"+endminutes);
+    endhours = ('0' + enddate.getHours()).slice(-2);
+    endminutes = ('0' + enddate.getMinutes()).slice(-2);
+    //console.log(eventname);
+    //console.log(color);
+    (function (j) {
+      scheduleInput(j, eventname, colorConverter(color), starthours + ":" + startminutes, endhours + ":" + endminutes);
     }(i));
   }
 }
